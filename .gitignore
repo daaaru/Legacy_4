@@ -220,6 +220,7 @@ hs_err_pid*
 
 ### Maven ###
 target/
+pom.properties
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -254,7 +255,6 @@ ehthumbs_vista.db
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-pom.properties
 
 # Windows Installer files
 *.cab
