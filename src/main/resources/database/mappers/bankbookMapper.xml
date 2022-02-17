@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daru.s1.bankbook.BankBookDAO">
+
+	<select id="detail" parameterType="com.daru.s1.bankbook.BankBookDTO" resultType="com.daru.s1.bankbook.BankBookDTO">
+		SELECT * FROM BANKBOOK WHERE booknumber = #{booknumber}
+	</select>
+	
+<!-- 	<select id="detail1" parameterMap="java.lang.Lon" resultType="com.daru.s1.bankbook.BankBookDTO">
+		SELECT * FROM BANKBOOK WHERE booknumber = #{num}
+	</select>
+	-->
+
+
+	<select id="list" resultType="com.daru.s1.bankbook.BankBookDTO">
+		SELECT * FROM BANKBOOK
+	</select>
+	
+	<insert id="add" parameterType="com.daru.s1.bankbook.BankBookDTO">
+		INSERT INTO bankbook (booknumber, bookname, bookcontents, bookrate, booksale)
+		VALUES (BANKBOOK_SEQ.NEXTVAL, #{bookname}, #{bookcontents}, #{bookrate}, #{booksale})
+	</insert>
+	
+	<delete id="delete" parameterType="com.daru.s1.bankbook.BankBookDTO">
+		DELETE bankbook WHERE booknumber= #{booknumber}
+	</delete>
+	
+</mapper>
