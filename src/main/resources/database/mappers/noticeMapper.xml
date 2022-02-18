@@ -4,20 +4,20 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.daru.s1.notice.NoticeDAO">
-	<select id="list" resultType="com.daru.s1.notice.NoticeDTO">
+	<select id="list" resultType="NoticeDTO">
 		SELECT * FROM NOTICE
 	</select>
 
-	<insert id="add" parameterType="com.daru.s1.notice.NoticeDTO">
+	<insert id="add" parameterType="NoticeDTO">
 		INSERT INTO NOTICE
 		VALUES (NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, SYSDATE, #{hit})
 	</insert>
 	
-	<select id="detail" parameterType="com.daru.s1.notice.NoticeDTO" resultType="com.daru.s1.notice.NoticeDTO">
+	<select id="detail" parameterType="NoticeDTO" resultType="NoticeDTO">
 		SELECT * FROM NOTICE WHERE NUM = #{num}
 	</select>
 	
-	<delete id="delete" parameterType="com.daru.s1.notice.NoticeDTO">
+	<delete id="delete" parameterType="NoticeDTO">
 		DELETE NOTICE WHERE NUM = #{num}
 	</delete>
 </mapper>
