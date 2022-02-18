@@ -5,7 +5,7 @@
 
 <mapper namespace="com.daru.s1.bankbook.BankBookDAO">
 
-	<select id="detail" parameterType="com.daru.s1.bankbook.BankBookDTO" resultType="com.daru.s1.bankbook.BankBookDTO">
+	<select id="detail" parameterType="BankBookDTO" resultType="BankBookDTO">
 		SELECT * FROM BANKBOOK WHERE booknumber = #{booknumber}
 	</select>
 	
@@ -15,16 +15,16 @@
 	-->
 
 
-	<select id="list" resultType="com.daru.s1.bankbook.BankBookDTO">
+	<select id="list" resultType="BankBookDTO">
 		SELECT * FROM BANKBOOK
 	</select>
 	
-	<insert id="add" parameterType="com.daru.s1.bankbook.BankBookDTO">
+	<insert id="add" parameterType="BankBookDTO">
 		INSERT INTO bankbook (booknumber, bookname, bookcontents, bookrate, booksale)
 		VALUES (BANKBOOK_SEQ.NEXTVAL, #{bookname}, #{bookcontents}, #{bookrate}, #{booksale})
 	</insert>
 	
-	<delete id="delete" parameterType="com.daru.s1.bankbook.BankBookDTO">
+	<delete id="delete" parameterType="BankBookDTO">
 		DELETE bankbook WHERE booknumber= #{booknumber}
 	</delete>
 	
