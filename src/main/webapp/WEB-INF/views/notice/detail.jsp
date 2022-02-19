@@ -11,8 +11,7 @@
 	<h3>Title : ${dto.title}</h3>
 	<h3>Contents : ${dto.contents }</h3>
 	<h3>Writer : ${dto.writer }</h3>
-	<h3>Date : ${dto.regDate }</h3>
-	<h3>Hit : ${dto.hit }</h3>
+	<h3>Hit : ${dto.hit}</h3>
 	
 	<a href="./list">List</a>
 </body>

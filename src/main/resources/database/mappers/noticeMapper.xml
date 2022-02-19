@@ -9,7 +9,7 @@
 	</select>
 
 	<insert id="add" parameterType="NoticeDTO">
-		INSERT INTO NOTICE
+		INSERT INTO NOTICE (NUM, TITLE, CONTENTS, WRITER, REGDATE, HIT)
 		VALUES (NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, SYSDATE, #{hit})
 	</insert>
 	

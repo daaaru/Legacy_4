@@ -14,8 +14,13 @@
 		Title <input type="text" name="title">
 		Contents <textarea name="contents" rows="10" cols="10"></textarea>
 		Writer <input type="text" name="writer">
-		RegDate <input type="date" name="regDate">
+		
 		Hit <input type="text" name="hit">	
+		
+		
+		<input type="submit" value="ADD">
+		
+		
 	</form>
 	
 	

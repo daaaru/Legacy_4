@@ -21,12 +21,12 @@ public class NoticeController {
 	public ModelAndView list(ModelAndView mv) throws Exception {
 		List<NoticeDTO> ar = noticeService.list();
 		mv.addObject("list", ar);
-		mv.setViewName("list");
+		mv.setViewName("notice/list");
 		return mv;
 	}
 	
 	//detail
-	@RequestMapping(value = "detail", method = RequestMethod.POST)
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public void detail(NoticeDTO noticeDTO, Model model) throws Exception {
 		noticeDTO = noticeService.detail(noticeDTO);
 		model.addAttribute("dto", noticeDTO);
