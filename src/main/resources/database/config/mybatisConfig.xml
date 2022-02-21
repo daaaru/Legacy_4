@@ -6,6 +6,6 @@
   <configuration>
   <typeAliases>
   	<typeAlias type="com.daru.s1.bankbook.BankBookDTO" alias="BankBookDTO"/>
-  	
-  </typeAliases>
+	<typeAlias type="com.daru.s1.notice.NoticeDTO" alias="NoticeDTO"/>
+	</typeAliases>  
   </configuration>
