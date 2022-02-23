@@ -1,0 +1,25 @@
+.c1 {
+    width: 920px;
+    height: 44px;
+    border: 2px solid black;
+    align-items: center;
+    margin: 0 auto;
+    background-color: black;
+    border-spacing: 0;
+}
+.t1 {
+    width: 100%;
+    color: white;
+}
+.c2 {
+    width: 920px;
+    height: 594px;
+    border: solid white 1px;
+    background-color: wheat;
+    align-items: center;
+    margin: 0 auto;
+}
+.t2 {
+    color: black;
+    margin-bottom: 50px;
+}
