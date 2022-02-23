@@ -30,3 +30,7 @@
 .nav_sub a{
     color: white;
 }
+.icon {
+	vertical-align: bottom;
+	border : 2px solid red;
+}
