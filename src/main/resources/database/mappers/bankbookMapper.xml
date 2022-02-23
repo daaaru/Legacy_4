@@ -5,6 +5,13 @@
 
 <mapper namespace="com.daru.s1.bankbook.BankBookDAO">
 
+	
+	<update id="update" parameterType="BankBookDTO">
+		UPDATE BANKBOOK SET BOOKNAME = #{bookname}, bookcontents=#{bookcontents}, booksale=#{booksale}, bookrate=#{bookrate}
+		WHERE booknumber=#{booknumber}
+	</update>
+	
+
 	<select id="detail" parameterType="BankBookDTO" resultType="BankBookDTO">
 		SELECT * FROM BANKBOOK WHERE booknumber = #{booknumber}
 	</select>
