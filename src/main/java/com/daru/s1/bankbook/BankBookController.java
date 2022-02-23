@@ -16,7 +16,20 @@ public class BankBookController {
 	private BankBookService bankBookService;
 	
 
+	//update이동
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void update(BankBookDTO bankBookDTO, Model model )throws Exception{
+		bankBookDTO = bankBookService.detail(bankBookDTO);
+		model.addAttribute("dto", bankBookDTO);
+	}
 	
+	//DB update
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String update(BankBookDTO bankBookDTO)throws Exception {
+		int result = bankBookService.update(bankBookDTO);
+		
+		return "redirect:./list";
+	}
 	
 	
 	//list

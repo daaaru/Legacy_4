@@ -13,6 +13,13 @@ public class BankBookDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.daru.s1.bankbook.BankBookDAO.";
 	
+	
+	//update
+	public int update(BankBookDTO bankBookDTO)throws Exception{
+		return sqlSession.update(NAMESPACE+"update", bankBookDTO);
+	}
+	
+	
 	//detail
 	public BankBookDTO detail(BankBookDTO bankBookDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE +"detail", bankBookDTO);
