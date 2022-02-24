@@ -20,9 +20,9 @@
 						<li><a href="/s1/member/logout">Logout</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a class="icon" href="/s1/member/login">로그인	<span class="material-icons icon">login</span>
+						<li><a href="/s1/member/login">로그인	<span class="material-icons">login</span>
 						</a></li>
-						<li><a href="/s1/member/join">회원가입<span class="material-icons icon">person_add
+						<li><a href="/s1/member/join">회원가입<span class="material-icons">person_add
 						</span></a></li>
 					</c:otherwise>
 				</c:choose>

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.daru.s1.MyJunitTest;
+import com.daru.s1.util.Pager;
 
 public class BankBookDAOTest extends MyJunitTest{
 
@@ -19,21 +20,38 @@ public class BankBookDAOTest extends MyJunitTest{
 		assertNotNull(bankBookDAO);
 	}
 	
-	//@Test
+	@Test
 	public void listTest() throws Exception {
-		List<BankBookDTO> ar = bankBookDAO.list();
-		assertNotEquals(0, ar.size());
+		Pager pager = new Pager();
+		pager.setPerPage(5L);
+		pager.makeRow();
+		List<BankBookDTO> ar = bankBookDAO.list(pager);
+		System.out.println(ar.get(0).getBooknumber());
+		System.out.println(ar.get(4).getBooknumber());
+		assertEquals(5, ar.size());
 	}
 	//insert
 	//@Test
 	public void addTest() throws Exception{
-		for(int i=0;i<10;i++) {
+		
+		
+		for(int i=0;i<200;i++) {
 		BankBookDTO bankBookDTO = new BankBookDTO();
 		bankBookDTO.setBookname("bookName"+i);
 		bankBookDTO.setBookcontents("Contents"+i);
-		bankBookDTO.setBookrate(1.12+i);
+		
+		double rate = Math.random();//0.0~1.0미만의 더블타입리턴
+		rate = rate*1000;//123.45567
+		int r = (int)rate;//123
+		rate = r/100.0;
+		
+		bankBookDTO.setBookrate(rate);//총3자리, 소숫점2자리
 		bankBookDTO.setBooksale(1);
 		int result = bankBookDAO.add(bankBookDTO);
+		
+			if(i%10==0) {
+			Thread.sleep(1000);//1초동안 멈춤
+			}
 		}
 		System.out.println("Insert Finish");
 		//assertEquals(1, result);
