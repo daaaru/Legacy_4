@@ -20,21 +20,46 @@
 		SELECT * FROM BANKBOOK WHERE booknumber = #{num}
 	</select>
 	-->
-	<select id="total" resultType="Long">
-		SELECT COUNT(BOOKNUMBER) FROM BANKBOOK 
-	
+	<select id="total" parameterType="Pager" resultType="Long">
+		SELECT COUNT(BOOKNUMBER) FROM BANKBOOK
+		WHERE BOOKNUMBER >0 
+		AND 
+			<choose>
+				<when test="kind=='col1'">
+					BOOKNAME
+				</when>
+				<otherwise>
+					BOOKCONTENTS
+				</otherwise>
+			</choose>
+			LIKE '%'||#{search}||'%'
 	</select>
 
 
 
 	<select id="list" parameterType="Pager" resultType="BankBookDTO">
 		SELECT * FROM 
-		(SELECT rownum R, B.* FROM
-		(SELECT *
-		FROM bankbook  WHERE BOOKNUMBER >0
-		ORDER BY booknumber DESC) B)
+			(SELECT rownum R, B.* FROM
+				(SELECT *
+				FROM bankbook  
+				WHERE BOOKNUMBER >0 
+				AND 
+				<choose>
+					<when test="kind=='col1'">
+						BOOKNAME
+					</when>
+					<otherwise>
+						BOOKCONTENTS
+					</otherwise>
+				</choose>
+				
+				 
+				LIKE '%'||#{search}||'%'
+				ORDER BY booknumber DESC)
+			B)
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
+	
 	
 	<insert id="add" parameterType="BankBookDTO">
 		INSERT INTO bankbook (booknumber, bookname, bookcontents, bookrate, booksale)

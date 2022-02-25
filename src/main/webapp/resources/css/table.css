@@ -1,25 +1,17 @@
-.c1 {
-    width: 920px;
-    height: 44px;
-    border: 2px solid black;
-    align-items: center;
-    margin: 0 auto;
-    background-color: black;
-    border-spacing: 0;
+@charset "UTF-8";
+ .table-basic{
+	 width: 100%;
+	 border-collapse: collapse;
+ }
+.table-basic td, .table-basic th{
+border: 1px solid #00000c;
+border-spacing: 0;
+height: 35px;
+
 }
-.t1 {
-    width: 100%;
-    color: white;
-}
-.c2 {
-    width: 920px;
-    height: 594px;
-    border: solid white 1px;
-    background-color: wheat;
-    align-items: center;
-    margin: 0 auto;
-}
-.t2 {
-    color: black;
-    margin-bottom: 50px;
+ 
+.table-basic tr:first-child{
+	background-color: #363636;
+	height: 45px;
+	color: #ffffff;
 }
