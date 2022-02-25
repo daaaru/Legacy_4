@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.daru.s1.util.Pager;
+
 @Repository
 public class NoticeDAO {
 	@Autowired
@@ -13,8 +15,8 @@ public class NoticeDAO {
 	private final String NAMESPACE = "com.daru.s1.notice.NoticeDAO.";
 	
 	//list
-	public List<NoticeDTO> list() throws Exception {
-		return sqlSession.selectList(NAMESPACE+"list");
+	public List<NoticeDTO> list(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"list", pager);
 	}
 	
 	//add

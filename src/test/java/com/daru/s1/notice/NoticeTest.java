@@ -8,29 +8,45 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.daru.s1.MyJunitTest;
+import com.daru.s1.util.Pager;
 
 public class NoticeTest extends MyJunitTest{
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
 
-	@Test
+	//@Test
 	public void listTest() throws Exception {
-		List<NoticeDTO> ar = noticeDAO.list();
+		Pager pager = new Pager();
+		pager.setPage(1L);
+		//makeRow메서드 호출해야함
+		pager.makeRow();
+		List<NoticeDTO> ar = noticeDAO.list(pager);
 		assertNotEquals(0, ar.size());
 	}
 	
 	//@Test
 	public void insertTest() throws Exception {
-		NoticeDTO noticeDTO = new NoticeDTO();
-		noticeDTO.setTitle("t2");
-		noticeDTO.setContents("c2");
-		noticeDTO.setWriter("w2");
-		noticeDTO.setHit(3L);
 		
-		int result = noticeDAO.add(noticeDTO);
 		
-		assertEquals(1, result);
+		for(int i=0;i<200;i++) {
+			NoticeDTO noticeDTO = new NoticeDTO();
+			noticeDTO.setTitle("Title"+i);
+			noticeDTO.setContents("Contents"+i);
+			noticeDTO.setWriter("Writer"+i);
+			
+			Long hit = (long)(Math.random()*100)+1;
+			
+			noticeDTO.setHit(hit);
+			int result = noticeDAO.add(noticeDTO);
+			
+			if(i%10==0) {
+				Thread.sleep(1000);
+			}
+		}
+		System.out.println("Insert Finish");
+		
+		//assertEquals(1, result);
 	}
 
 	//@Test
