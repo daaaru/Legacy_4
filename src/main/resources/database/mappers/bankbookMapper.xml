@@ -20,6 +20,10 @@
 		SELECT * FROM BANKBOOK WHERE booknumber = #{num}
 	</select>
 	-->
+	<select id="total" resultType="Long">
+		SELECT COUNT(BOOKNUMBER) FROM BANKBOOK
+	</select>
+
 
 
 	<select id="list" resultType="BankBookDTO">

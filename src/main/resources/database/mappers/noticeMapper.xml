@@ -19,6 +19,10 @@
 		VALUES (NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, SYSDATE, #{hit})
 	</insert>
 	
+	<select id="total" resultType="Long">
+		SELECT COUNT (NUM) FROM NOTICE
+	</select>
+	
 	<select id="detail" parameterType="NoticeDTO" resultType="NoticeDTO">
 		SELECT * FROM NOTICE WHERE NUM = #{num}
 	</select>

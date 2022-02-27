@@ -37,6 +37,23 @@
 	
 	</table>
 	
+	<div>
+		<!--  이전블럭으로 가는거 -->
+		<c:if test="${pager.pre }">
+			<a href="./list?page=${pager.startNum-1 }">PREVIEW</a>
+		</c:if>
+	
+		<c:forEach begin="${pager.startNum }" end="${pager.lastNum }" var="i">
+			<a href="./list?page=${i }">${i }</a>
+		</c:forEach>
+		
+		<!--  다음블럭으로 가는거  -->
+		<c:if test="${pager.next }">
+			<a href="./list?page=${pager.lastNum+1 }">NEXT</a>
+		</c:if>
+		
+	</div>
+	
 	<a href="./add">ADD</a>
 	
 </body>

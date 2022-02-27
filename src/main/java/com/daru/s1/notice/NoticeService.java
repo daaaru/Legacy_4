@@ -23,6 +23,8 @@ public class NoticeService {
 		
 		//전처리작업
 		pager.makeRow();
+		Long totalCount = noticeDAO.total();
+		pager.makeNum(totalCount);
 		
 		//호출후 후처리작업
 		List<NoticeDTO> ar = noticeDAO.list(pager);

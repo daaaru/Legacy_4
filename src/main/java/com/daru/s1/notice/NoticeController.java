@@ -23,6 +23,7 @@ public class NoticeController {
 	public ModelAndView list(ModelAndView mv, Pager pager) throws Exception {
 		List<NoticeDTO> ar = noticeService.list(pager);
 		mv.addObject("list", ar);
+		mv.addObject(pager);
 		mv.setViewName("notice/list");
 		return mv;
 	}
