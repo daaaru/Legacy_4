@@ -83,16 +83,26 @@ public class MemberController {
 			response.addCookie(cookie);
 		}
 		
+//		
+//		
+//		String path ="redirect:./login";
+//		
+//		//로그인이 됐다면
+//		if(memberDTO != null) {
+//			session.setAttribute("member", memberDTO);
+//			path = "redirect:../";
+//		}
+		String message ="Login Fail";
+		String p="./login";
 		
-		
-		String path ="redirect:./login";
-		
-		//로그인이 됐다면
-		if(memberDTO != null) {
+		if(memberDTO!=null) {
 			session.setAttribute("member", memberDTO);
-			path = "redirect:../";
+			message = "Login Success";
+			p="../";
 		}
-		
+		model.addAttribute("message", message);
+		model.addAttribute("path", p);
+		String path="common/result";
 		return path;
 	}
 }
