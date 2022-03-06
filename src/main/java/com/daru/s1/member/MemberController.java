@@ -53,6 +53,12 @@ public class MemberController {
 	public void join() throws Exception {
 	}
 	
+	@RequestMapping(value = "joinCheck", method = RequestMethod.GET)
+	public void joinCheck()throws Exception{
+		
+	}
+	
+	
 	//login 이동
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public void login(Model model, @CookieValue(value="remember", defaultValue = "",required = false)String rememberID) throws Exception {
