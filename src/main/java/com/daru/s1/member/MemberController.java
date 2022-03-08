@@ -53,6 +53,12 @@ public class MemberController {
 	public void join() throws Exception {
 	}
 	
+	@RequestMapping(value = "joinCheck", method = RequestMethod.GET)
+	public void joinCheck()throws Exception{
+		
+	}
+	
+	
 	//login 이동
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public void login(Model model, @CookieValue(value="remember", defaultValue = "",required = false)String rememberID) throws Exception {
@@ -83,16 +89,26 @@ public class MemberController {
 			response.addCookie(cookie);
 		}
 		
+//		
+//		
+//		String path ="redirect:./login";
+//		
+//		//로그인이 됐다면
+//		if(memberDTO != null) {
+//			session.setAttribute("member", memberDTO);
+//			path = "redirect:../";
+//		}
+		String message ="Login Fail";
+		String p="./login";
 		
-		
-		String path ="redirect:./login";
-		
-		//로그인이 됐다면
-		if(memberDTO != null) {
+		if(memberDTO!=null) {
 			session.setAttribute("member", memberDTO);
-			path = "redirect:../";
+			message = "Login Success";
+			p="../";
 		}
-		
+		model.addAttribute("message", message);
+		model.addAttribute("path", p);
+		String path="common/result";
 		return path;
 	}
 }

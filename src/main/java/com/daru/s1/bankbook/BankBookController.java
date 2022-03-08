@@ -2,11 +2,14 @@ package com.daru.s1.bankbook;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.daru.s1.util.Pager;
@@ -50,9 +53,22 @@ public class BankBookController {
 	
 	//detail
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public void detail(BankBookDTO bankBookDTO, Model model) throws Exception{
+	public String detail(BankBookDTO bankBookDTO, Model model) throws Exception{
 		bankBookDTO = bankBookService.detail(bankBookDTO);
-		model.addAttribute("dto", bankBookDTO);
+		
+		//조회가 성공하면 출력
+		//실패하면 alert으로 없는번호입니다. 다시 list로이동
+		//common/result.jsp활용
+		
+		String view ="common/result";
+		if(bankBookDTO!=null) {
+			view = "bankbook/detail";
+			model.addAttribute("dto", bankBookDTO);
+		}else {
+			model.addAttribute("message", "없는번호 입니다");
+			model.addAttribute("path", "./list");
+		}
+		return view;
 		
 	}
 	//insert form 이동
