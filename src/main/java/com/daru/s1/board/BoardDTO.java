@@ -1,27 +1,26 @@
-package com.daru.s1.notice;
+package com.daru.s1.board;
 
-import java.util.Date;
+import java.sql.Date;
 
-public class NoticeDTO {
-
+public class BoardDTO {
+	
 	private Long num;
 	private String title;
 	private String contents;
 	private String writer;
 	private Date regDate;
 	private Long hit;
-	
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
 	public Long getNum() {
 		return num;
 	}
 	public void setNum(Long num) {
 		this.num = num;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContents() {
 		return contents;

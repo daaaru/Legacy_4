@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- 이건 xml이다 -->
+<!-- 스키마 -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daru.s1.board.qna.QnaDAO">
+
+	<insert id="reply" parameterType="QnaDTO">
+		insert into qna(num, writer, title, contents, regDate, hit, ref, step, depth)
+		values(qna_SEQ.nextval, #{writer}, #{title},#{contents}, sysdate, 0, #{ref}, #{step}, #{depth})
+	</insert>
+
+
+	<update id="stepUpdate" parameterType="QnaDTO">
+		UPDATE QNA SET step = step+1
+		WHERE REF = #{ref} and step>#{step}
+	</update>
+
+	<!-- list -->
+	<select id="list" resultType="QnaDTO" parameterType="Pager">
+		select * from 
+		(SELECT rownum R, B.* FROM 
+		        (SELECT * FROM qna WHERE 
+		        NUM>0 
+		        	and 
+		        	<choose>
+		        		<when test="kind=='col1'">
+		        			TITLE
+		        		</when>
+		        		<when test="kind=='col2'">
+		        			CONTENTS
+		        		</when>
+		        		<otherwise>
+		        			WRITER
+		        		</otherwise>
+		        	</choose>
+		        	LIKE '%'||#{search}||'%'
+		            ORDER BY REF DESC, STEP ASC
+		         ) B
+		     )
+		WHERE R between #{startRow} and #{lastRow}
+	</select>
+	
+	<!-- total -->
+	<select id="total" resultType="Long" parameterType="Pager">
+ 		SELECT COUNT(NUM) FROM QNA
+ 		WHERE
+ 			NUM>0 
+		    and 
+		    <choose>
+		       	<when test="kind=='col1'">
+		       		TITLE
+		   		</when>
+		        		<when test="kind=='col2'">
+		        			CONTENTS
+		        		</when>
+		        		<otherwise>
+		        			WRITER
+		        		</otherwise>
+		        	</choose>
+        	LIKE '%'||#{search}||'%' 
+ 	</select>
+
+	<!-- update -->
+	<update id="update" parameterType="QnaDTO">
+		update qna set title=#{title}, contents=#{contents} where num=#{num}
+	</update>
+
+	<!--detail -->
+	<select id="detail" parameterType="QnaDTO" resultType="QnaDTO">
+		select * from qna where num=#{num}
+	</select>
+
+	<!-- add원본 -->
+	<insert id="add" parameterType="QnaDTO">
+		insert into qna(num, writer, title, contents, regDate, hit, ref, step, depth)
+		values(qna_SEQ.nextval, #{writer}, #{title},#{contents}, sysdate, 0, qna_seq.CURRVAL,0,0)
+	</insert>
+	
+	<!-- delete -->
+	<delete id="delete" parameterType="QnaDTO">
+		delete qna where num=#{num}
+	</delete>
+</mapper>
