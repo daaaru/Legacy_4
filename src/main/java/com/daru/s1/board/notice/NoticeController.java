@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.daru.s1.board.BoardDTO;
@@ -84,9 +85,9 @@ public class NoticeController {
 	}
 	//입력받은 값을 받아서 DB로 보내 
 			@RequestMapping(value = "add",method = RequestMethod.POST)
-			public ModelAndView add(NoticeDTO noticeDTO) throws Exception{
+			public ModelAndView add(NoticeDTO noticeDTO, MultipartFile [] files) throws Exception{
 				ModelAndView mv= new ModelAndView();
-				int result= noticeService.add(noticeDTO);
+				int result= noticeService.add(noticeDTO, files);
 				mv.setViewName("redirect:./list");
 				
 				return mv;

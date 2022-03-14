@@ -68,14 +68,33 @@
 	</update>
 
 	<!--detail -->
-	<select id="detail" parameterType="QnaDTO" resultType="QnaDTO">
-		select * from qna where num=#{num}
+	<select id="detail" parameterType="QnaDTO" resultMap="detailResult">
+		SELECT Q.*, QF.*
+		FROM 
+			QNA Q
+				LEFT OUTER JOIN
+			QNAFILE QF
+			ON Q.NUM=QF.NUM 
+		WHERE Q.NUM = #{num}
+		
 	</select>
+
+	<select id="seqNum" resultType="Long">
+		SELECT QNA_SEQ.NEXTVAL FROM DUAL
+	</select>
+
+	<insert id="addFile" parameterType="QnaFileDTO">
+		insert into qnafile(filenum, num, filename, oriname)
+		values (QNA_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
 
 	<!-- add원본 -->
 	<insert id="add" parameterType="QnaDTO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+		SELECT QNA_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		insert into qna(num, writer, title, contents, regDate, hit, ref, step, depth)
-		values(qna_SEQ.nextval, #{writer}, #{title},#{contents}, sysdate, 0, qna_seq.CURRVAL,0,0)
+		values(#{num}, #{writer}, #{title},#{contents}, sysdate, 0, qna_seq.CURRVAL,0,0)
 	</insert>
 	
 	<!-- delete -->

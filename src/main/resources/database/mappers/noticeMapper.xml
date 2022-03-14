@@ -57,15 +57,46 @@
 
 	
 	<select id="detail"
-		parameterType="NoticeDTO"
-		resultType="NoticeDTO">
-		select * from notice where num=#{num}
+		parameterType="NoticeDTO" resultMap="detailResult">
+		SELECT N.*, NF.*
+		FROM 
+			NOTICE N
+				LEFT OUTER JOIN
+			NOTICEFILE NF
+			ON N.NUM=NF.NUM 
+		WHERE N.NUM = #{num}
 	</select>
+	
+	<resultMap type="NoticeDTO" id="detailResult">
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		<result column="regDate" property="regDate"/>
+		<result column="hit" property="hit"/>
+		<collection property="fileDTOs" javaType="List" ofType="NoticeFileDTO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+	</resultMap>
 
+	<select id="seqNum" resultType="Long">
+		<!-- select max(num) from notice -->
+		SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<insert id="addFile" parameterType="BoardFileDTO">
+		insert into noticefile (FILENUM, NUM, FIlENAME, ORINAME)
+		values (FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
 
 	<insert id="add" parameterType="NoticeDTO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		insert into notice
-		values(NOTICE_SEQ.nextval,#{title},#{contents},#{writer},sysdate,0)
+		values(#{num},#{title},#{contents},#{writer},sysdate,0)
 	</insert>
 	
 	

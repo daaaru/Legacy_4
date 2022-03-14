@@ -12,5 +12,10 @@
 	<typeAlias type="java.lang.Long" alias="Long"/>
 	<typeAlias type="com.daru.s1.board.BoardDTO" alias="BoardDTO"/>
 	<typeAlias type="com.daru.s1.board.qna.QnaDTO" alias="QnaDTO"/>
+	<typeAlias type="com.daru.s1.member.MemberFileDTO" alias="MemberFileDTO"/>
+	<typeAlias type="com.daru.s1.board.BoardFileDTO" alias="BoardFileDTO"/>
+	<typeAlias type="com.daru.s1.board.qna.QnaFileDTO" alias="QnaFileDTO"/>
+	<typeAlias type="java.util.List" alias="List"/>
+	<typeAlias type="com.daru.s1.board.notice.NoticeFileDTO" alias="NoticeFileDTO"/>
 	</typeAliases>  
   </configuration>

@@ -14,11 +14,17 @@
 	<h3>Title : ${dto.title}</h3>
 	<h3>Writer : ${dto.writer}</h3>
 	<h3>Contents : ${dto.contents }</h3>
-
+	<div>
+		<c:forEach items="${dto.fileDTOs}" var="f">
+			<a href="../resources/upload/${board}/${f.fileName}">${f.oriName}</a>
+		</c:forEach>
+	</div>
 	
 	<a href="./list">List</a>
 	<a href="./delete?num=${dto.num }">DELETE</a>
 	<a href="./update?num=${dto.num }">UPDATE</a>
+	<c:if test="${board ne 'notice' }">
 	<a href="./reply?num=${dto.num }">Reply</a>
+	</c:if>
 </body>
 </html>

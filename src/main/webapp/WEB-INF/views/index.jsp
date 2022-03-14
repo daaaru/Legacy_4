@@ -12,7 +12,9 @@
 </head>
 <body>
 	<c:import url="./template/header.jsp"></c:import>
-	
+	<div>
+		<img alt="" src="./resources/images/hey.jpeg">
+	</div>
 	
 	<h1>Index Page</h1>
 	
@@ -32,6 +34,8 @@
 		</c:if>
 		
 	</div>
+	
+	<img alt="" src="./resources/upload/member/1b4a076c-ddb5-4cba-a184-057217e1cd6f_1590377048793.jpeg">
 	
 </body>
 </html>

@@ -10,10 +10,10 @@
 	<h1>Member Join page</h1>
 	
 	<div>
-		<form action="./join" method="post" id="frm">
+		<form action="./join" method="post" id="frm" enctype="multipart/form-data">
 			<fieldset>
 				<legend>ID</legend>
-				<input type="text" name="id" id="idx";>
+				<input type="text" name="id" id="idx">
 				<div id="idresult"></div>
 			</fieldset>
 			
@@ -32,26 +32,33 @@
 			
 			<fieldset>
 				<legend>Name</legend>
-				<input type="text" name="name">
+				<input type="text" name="name" id="name">
 			</fieldset>
 			
 			<fieldset>
 				<legend>Phone</legend>
-				<input type="text" name="phone">
+				<input type="text" name="phone" id="phone">
 			</fieldset>
 			
 			<fieldset>
 				<legend>Email</legend>
-				<input type="text" name="email">
+				<input type="text" name="email" id="email">
 			</fieldset>
 			
 			<fieldset>
-				<button type="button" id="btn">JOIN</button>
+				<legend>Photo</legend>
+				<input type="file" name="photo" id="photo">
 			</fieldset>
+			
+			<fieldset>
+<!-- 최종완성시 사용하세요<button type="button" id="btn">JOIN</button>
+ -->			
+ 			<button type="submit" id="btn">JOIN</button>
+ 			</fieldset>
 			
 			</form>
 		</div>
 		
-		<script type="text/javascript" src="../resources/js/join2.js"></script>
+		<!-- <script type="text/javascript" src="../resources/js/join2.js"></script> -->
 </body>
 </html>
