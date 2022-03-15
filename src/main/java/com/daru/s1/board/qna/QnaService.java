@@ -63,7 +63,17 @@ public class QnaService implements BoardService {
 	@Override
 	public int delete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return qnaDAO.delete(boardDTO);
+		
+		List<QnaFileDTO> ar = qnaDAO.listFile(boardDTO);
+		int result = qnaDAO.delete(boardDTO);
+		
+		if(result>0) {
+			for(QnaFileDTO dto:ar) {
+				boolean check = fileManager.remove("resources/upload/qna", dto.getFileName());
+			}
+		}
+		
+		return result;
 	}
 	
 	public int reply(QnaDTO qnaDTO)throws Exception{

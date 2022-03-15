@@ -24,6 +24,10 @@ public class QnaDAO implements BoardDAO{
 		return sqlSession.selectOne(NAMESPACE+"detail",boardDTO);
 	}
 
+	public List<QnaFileDTO> listFile (BoardDTO boardDTO)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"listFile", boardDTO);
+	}
+	
 	@Override
 	public List<BoardDTO> list(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
