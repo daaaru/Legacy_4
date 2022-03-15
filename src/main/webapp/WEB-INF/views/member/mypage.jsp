@@ -11,11 +11,12 @@
 	<h1>My Page</h1>
 	
 	
-	<h3>${dto.id }</h3>
-	<h3>${dto.name }</h3>
+	<h3>${dto.id}</h3>
+	<h3>${dto.name}</h3>
 	<h3>${dto.phone}</h3>
-	<h3>${dto.email }</h3>
+	<h3>${dto.email}</h3>
 	<img alt="" src="../resources/upload/member/${dto.memberFileDTO.fileName}">
+	<a href="./photoDown?fileNum=${dto.memberFileDTO.fileNum}">${dto.memberFileDTO.oriName}</a>
 	<h3>${dto.memberFileDTO.oriName}</h3>
 </body>
 </html>

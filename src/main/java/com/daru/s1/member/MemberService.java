@@ -15,6 +15,11 @@ public class MemberService {
 	@Autowired
 	private FileManager fileManager;
 	
+	public MemberFileDTO datilFile(MemberFileDTO memberFileDTO)throws Exception{
+		return memberDAO.detailFile(memberFileDTO);
+	}
+	
+	
 	//join
 	public int join(MemberDTO memberDTO, MultipartFile photo)throws Exception {
 		int result = memberDAO.join(memberDTO);

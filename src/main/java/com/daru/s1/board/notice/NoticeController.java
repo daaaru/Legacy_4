@@ -30,6 +30,14 @@ public class NoticeController {
 	public String board() {
 		return "notice";
 	}
+	@RequestMapping(value = "fileDown", method = RequestMethod.GET)
+	public ModelAndView fileDown(NoticeFileDTO noticeFileDTO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		noticeFileDTO = noticeService.detailFile(noticeFileDTO);
+		mv.setViewName("fileDown");
+		mv.addObject("file", noticeFileDTO);
+		return mv;
+	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ModelAndView update(NoticeDTO noticeDTO)throws Exception{

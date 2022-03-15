@@ -17,6 +17,17 @@ public class NoticeDAO implements BoardDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.daru.s1.board.notice.NoticeDAO.";
+	
+	public NoticeFileDTO detailFile(NoticeFileDTO noticeFileDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"detailFile", noticeFileDTO);
+	}
+	
+	public List<NoticeFileDTO> listFile(BoardDTO boardDTO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"listFile", boardDTO);
+	}
+	
+	
+	
 	@Override
 	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub

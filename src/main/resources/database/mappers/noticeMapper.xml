@@ -30,6 +30,19 @@
 		WHERE R between #{startRow} and #{lastRow}
 	</select>
 	
+	
+	<select id="listFile" parameterType="BoardDTO" resultType="NoticeFileDTO">
+		SELECT * FROM NOTICEFILE
+		WHERE NUM = #{num}
+	</select>
+	
+	
+	<select id="detailFile" parameterType="NoticeFileDTO" resultType="NoticeFileDTO">
+		SELECT * FROM NOTICEFILE
+		WHERE FILENUM=#{fileNum}
+	</select>
+	
+	
 	<!-- total -->
 	<select id="total" resultType="Long" parameterType="Pager">
  		SELECT COUNT(NUM) FROM NOTICE
@@ -61,7 +74,7 @@
 		SELECT N.*, NF.*
 		FROM 
 			NOTICE N
-				LEFT OUTER JOIN
+				LEFT JOIN
 			NOTICEFILE NF
 			ON N.NUM=NF.NUM 
 		WHERE N.NUM = #{num}

@@ -24,7 +24,7 @@
 	
 	<div>
 		<c:if test="${not empty member}">
-			<a href="./member/mypage">MyPage</a>
+			<a class="my" href="./member/mypage">MyPage</a>
 			<a href="./member/logout">Logout</a>
 		</c:if>
 		
@@ -32,7 +32,7 @@
 			<a href="./member/login">Login</a>
 			<a href="./member/join">Join</a>
 		</c:if>
-		
+	
 	</div>
 	
 	<img alt="" src="./resources/upload/member/1b4a076c-ddb5-4cba-a184-057217e1cd6f_1590377048793.jpeg">
