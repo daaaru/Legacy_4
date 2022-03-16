@@ -27,11 +27,8 @@
 	</beans:bean>
 	
 	
-	
 	<beans:bean class="com.daru.s1.interceptor.LoginInterceptor" id="loginInterceptor"></beans:bean>
-	
 	<interceptors>
-	
 		<interceptor>
 <!-- 			<mapping path="/qna/add"/>
 			<mapping path="/qna/detail"/>
@@ -41,28 +38,27 @@
 			<exclude-mapping path="/qna/list"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
-		
+	
 		<interceptor>
 			<mapping path="/qna/delete"/>
-			<beans:bean class="com.daru.s1.interceptor.WriterInterceptor"/>
+			<beans:ref bean="writerInterceptor"/>
 		</interceptor>
-	
-	
+		
 		<interceptor>
-			<mapping path="/notice/update/"/>
-			<mapping path="/qna/update/"/>
+			<mapping path="/notice/update"/>
+			<mapping path="/qna/update"/>
 			<beans:bean class="com.daru.s1.interceptor.WriterCheckInterceptor"/>
 		</interceptor>
-		
-		
+	
 		<interceptor>
 			<mapping path="/bankbook/**"/>
 			<beans:bean class="com.daru.s1.interceptor.TestInterceptor"/>
 		</interceptor>
+		
 	</interceptors>
 	
 	<context:component-scan base-package="com.daru.s1" />
-
+	
 	
 	
 </beans:beans>

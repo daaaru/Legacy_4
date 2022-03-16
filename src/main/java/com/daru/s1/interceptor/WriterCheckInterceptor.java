@@ -11,17 +11,16 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.daru.s1.board.BoardDTO;
 import com.daru.s1.member.MemberDTO;
 
-public class WriterCheckInterceptor extends HandlerInterceptorAdapter{
+public class WriterCheckInterceptor extends HandlerInterceptorAdapter {
 
-	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		
 		System.out.println("WriterCheck Interceptor PostHandle");
-
+		
 		String method = request.getMethod();
-		System.out.println("method :"+ method);
+		System.out.println("Method : "+method);
 		
 		if(method.equals("POST")) {
 			return;
@@ -35,13 +34,14 @@ public class WriterCheckInterceptor extends HandlerInterceptorAdapter{
 		BoardDTO boardDTO = (BoardDTO)map.get("dto");
 		
 		if(!memberDTO.getId().equals(boardDTO.getWriter())) {
-			//spring 문법
-			//1. forward
+			//Spring 문법
+			//1. foward
 			modelAndView.addObject("message", "수정 권한이 없습니다");
 			modelAndView.addObject("path", "./list");
 			modelAndView.setViewName("common/result");
-			//2. redirect
 			
+			//2. redirect
 		}
+	
 	}
 }
