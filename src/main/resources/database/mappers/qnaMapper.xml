@@ -1,96 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?> <!-- 이건 xml이다 -->
-<!-- 스키마 -->
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.daru.s1.board.qna.QnaDAO">
-
-
-	<select id="listFile" parameterType="BoardDTO" resultType="QnaFileDTO">
-		SELECT * FROM QNAFILE
-		WHERE NUM = #{num}
-	</select>
-
-	<select id="detailFile" parameterType="QnaFileDTO" resultType="QnaFileDTO">
+    
+ <mapper namespace="com.daru.s1.board.qna.QnaDAO">
+ 	<select id="listFile" parameterType="BoardDTO" resultType="QnaFileDTO">
+ 		SELECT * FROM QNAFILE
+ 		WHERE NUM=#{num}
+ 	</select>
+ 
+  	<select id="detailFile" parameterType="QnaFileDTO" resultType="QnaFileDTO">
  		SELECT * FROM QNAFILE
  		WHERE FILENUM=#{fileNum}
  	</select>
- 	
-	<insert id="reply" parameterType="QnaDTO">
-		insert into qna(num, writer, title, contents, regDate, hit, ref, step, depth)
-		values(qna_SEQ.nextval, #{writer}, #{title},#{contents}, sysdate, 0, #{ref}, #{step}, #{depth})
-	</insert>
-
-
-	<update id="stepUpdate" parameterType="QnaDTO">
-		UPDATE QNA SET step = step+1
-		WHERE REF = #{ref} and step>#{step}
-	</update>
-
-	<!-- list -->
-	<select id="list" resultType="QnaDTO" parameterType="Pager">
-		select * from 
-		(SELECT rownum R, B.* FROM 
-		        (SELECT * FROM qna WHERE 
-		        NUM>0 
-		        	and 
-		        	<choose>
-		        		<when test="kind=='col1'">
-		        			TITLE
-		        		</when>
-		        		<when test="kind=='col2'">
-		        			CONTENTS
-		        		</when>
-		        		<otherwise>
-		        			WRITER
-		        		</otherwise>
-		        	</choose>
-		        	LIKE '%'||#{search}||'%'
-		            ORDER BY REF DESC, STEP ASC
-		         ) B
-		     )
-		WHERE R between #{startRow} and #{lastRow}
-	</select>
-	
-	<!-- total -->
-	<select id="total" resultType="Long" parameterType="Pager">
- 		SELECT COUNT(NUM) FROM QNA
- 		WHERE
- 			NUM>0 
-		    and 
-		    <choose>
-		       	<when test="kind=='col1'">
-		       		TITLE
-		   		</when>
-		        		<when test="kind=='col2'">
-		        			CONTENTS
-		        		</when>
-		        		<otherwise>
-		        			WRITER
-		        		</otherwise>
-		        	</choose>
-        	LIKE '%'||#{search}||'%' 
+ 
+  	<insert id="addFile" parameterType="BoardFileDTO">
+ 		INSERT INTO QNAFILE (FILENUM, NUM, FILENAME, ORINAME)
+ 		VALUES (FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+ 	</insert>
+ 
+ 	<insert id="reply" parameterType="QnaDTO">
+ 		insert into qna (num, writer, title, contents, regDate, hit, ref, step, depth)
+ 		values (qna_seq.nextval, #{writer}, #{title}, #{contents}, sysdate, 0, #{ref}, #{step}, #{depth})
+ 	</insert>
+ 
+ 	<update id="stepUpdate" parameterType="QnaDTO">
+ 		update qna set step=step+1
+ 		where ref=#{ref} and step>#{step}
+ 	</update>
+ 
+ 	<insert id="add" parameterType="QnaDTO">
+ 		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+ 			SELECT qna_seq.nextval from dual
+ 		</selectKey>
+ 		insert into qna (num, writer, title, contents, regDate, hit, ref, step, depth)
+ 		values (#{num}, #{writer}, #{title}, #{contents}, sysdate, 0, #{num}, 0, 0)
+ 	</insert>
+ 
+ 	<select id="detail" parameterType="QnaDTO" resultMap="detailResult">
+ 		SELECT N.*, NF.*
+		FROM
+	        QNA N
+	            LEFT OUTER JOIN
+	        QNAFILE NF
+	        	ON N.NUM=NF.NUM
+		WHERE   N.NUM=#{num} 
  	</select>
-
-	<!-- update -->
-	<update id="update" parameterType="QnaDTO">
-		update qna set title=#{title}, contents=#{contents} where num=#{num}
-	</update>
-
-	<!--detail -->
-	<select id="detail" parameterType="QnaDTO" resultMap="detailResult">
-		SELECT Q.*, QF.*
-		FROM 
-			QNA Q
-				LEFT OUTER JOIN
-			QNAFILE QF
-			ON Q.NUM=QF.NUM 
-		WHERE Q.NUM = #{num}
-		
-	</select>
-	
-	<resultMap type="QnaDTO" id="detailResult">
+ 	
+ 	<resultMap type="QnaDTO" id="detailResult">
  		<id column="num" property="num"/>
  		<result column="title" property="title"/>
  		<result column="writer" property="writer"/>
@@ -106,27 +63,59 @@
  			<result column="oriName" property="oriName"/>
  		</collection>
  	</resultMap>
-
-	<select id="seqNum" resultType="Long">
-		SELECT QNA_SEQ.NEXTVAL FROM DUAL
-	</select>
-
-	<insert id="addFile" parameterType="QnaFileDTO">
-		insert into qnafile(filenum, num, filename, oriname)
-		values (QNA_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
-	</insert>
-
-	<!-- add원본 -->
-	<insert id="add" parameterType="QnaDTO">
-		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
-		SELECT QNA_SEQ.NEXTVAL FROM DUAL
-		</selectKey>
-		insert into qna(num, writer, title, contents, regDate, hit, ref, step, depth)
-		values(#{num}, #{writer}, #{title},#{contents}, sysdate, 0, #{num},0,0)
-	</insert>
-	
-	<!-- delete -->
-	<delete id="delete" parameterType="QnaDTO">
-		delete qna where num=#{num}
-	</delete>
-</mapper>
+ 
+ 	<select id="list" parameterType="Pager" resultType="QnaDTO">
+ 		SELECT * FROM
+		    (SELECT rownum R, B.* FROM 
+		        (SELECT * FROM QNA WHERE 
+		        	NUM>0 
+		        	and 
+		        	<choose>
+		        		<when test="kind=='col1'">
+		        			TITLE
+		        		</when>
+		        		<when test="kind =='col2'">
+		        			CONTENTS
+		        		</when>
+		        		<otherwise>
+		        			WRITER
+		        		</otherwise>
+		        	</choose>	
+		        	LIKE '%'||#{search}||'%'
+		            ORDER BY REF DESC, STEP ASC
+		         ) B
+		     )
+		WHERE R between #{startRow} and #{lastRow} 
+ 	</select>
+ 	
+ 	<select id="total" resultType="Long" parameterType="Pager">
+ 		SELECT COUNT(NUM) FROM QNA
+ 		WHERE
+ 			NUM>0 
+		    and 	       	
+		     <choose>
+		     	<when test="kind=='col1'">
+		     		TITLE
+		     	</when>
+		     	<when test="kind =='col2'">
+		     		CONTENTS
+		     	</when>
+		     	<otherwise>
+		     		WRITER
+		     	</otherwise>
+		     </choose>	
+        	LIKE '%'||#{search}||'%' 
+ 	</select>
+ 	
+ 	<update id="update" parameterType="QnaDTO">
+ 		update qna set title=#{title}, contents=#{contents} where num=#{num}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="QnaDTO">
+ 		delete qna where num=#{num}
+ 	</delete>
+ 	
+ 	
+ 	
+ 
+ </mapper>  

@@ -1,57 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?> <!-- 이건 xml이다 -->
-<!-- 스키마 -->
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.daru.s1.member.MemberDAO">
-
-	
-	<select id="detailFile" parameterType="MemberFileDTO" resultType="MemberFileDTO">
-		SELECT * FROM MEMBERFILE
+ <mapper namespace="com.daru.s1.member.MemberDAO">
+ 	<select id="detailFile" parameterType="MemberFileDTO" resultType="MemberFileDTO">
+ 		SELECT * FROM MEMBERFILE
  		WHERE FILENUM=#{fileNum}
-	</select>
-	
-	<insert id="addFile" parameterType="MemberFileDTO">
-		INSERT INTO MEMBERFILE (FILENUM, ID, FILENAME, ORINAME)
+ 	</select>
+ 
+ 	<insert id="addFile" parameterType="MemberFileDTO">
+ 		INSERT INTO MEMBERFILE (FILENUM, ID, FILENAME, ORINAME)
  		VALUES (FILE_SEQ.NEXTVAL, #{id}, #{fileName}, #{oriName})
-	</insert>
+ 	</insert>
+ 
 
-	
-	<!-- mypage -->
-	<select id="mypage" parameterType="MemberDTO" resultMap="mypageResult">
-		SELECT ID, M.NAME, M.EMAIL,M.PHONE, MF.FILENUM, MF.FILENAME, MF.ORINAME
+ 	<select id="mypage" parameterType="MemberDTO" resultMap="mypageResult">
+ 		SELECT ID, M.NAME, M.EMAIL,M.PHONE, MF.FILENUM, MF.FILENAME, MF.ORINAME
  		FROM
  			MEMBER M
  				LEFT JOIN
  			MEMBERFILE MF
  			USING(ID)
  		WHERE ID = #{id}
-		
-	</select>
-	
-	<resultMap type="MemberDTO" id="mypageResult">
-		<id column="id" property="id"/> <!-- pk -->
-		<result column="name" property="name" /><!-- pk를 제외한 나머지 -->
-		<result column="email" property="email"/> 
-		<result column="phone" property="phone"/> 
-		<association property="memberFileDTO" javaType="MemberFileDTO">
-			<id column="fileNum" property="fileNum"/> <!-- pk -->
-			<result column="fileName" property="fileName"/>
-			<result column="oriName" property="oriName"/>
-		</association> <!-- 1:1 -->
-	
-	</resultMap>
-
-	<insert id="join" parameterType="MemberDTO">
-		INSERT into member(id,pw,name,phone,email)
-		values (#{id},#{pw},#{name},#{phone},#{email}) 
-	</insert>
-	
-	<select id="login" parameterType="MemberDTO" resultType="MemberDTO">
-		select id,name from member where id=#{id} and pw=#{pw}
-	</select>
-
-	
-
-</mapper>
+ 	</select>
+ 	
+ 	<resultMap type="MemberDTO" id="mypageResult">
+ 		<id column="id" property="id"/> <!-- PK -->
+ 		<result column="name" property="name"/><!-- PK를 제외한 나머지 -->
+ 		<result column="email" property="email"/>
+ 		<result column="phone" property="phone"/>
+ 		<association property="memberFileDTO" javaType="MemberFileDTO">
+ 			<id column="fileNum" property="fileNum"/>
+ 			<result column="fileName" property="fileName"/>
+ 			<result column="oriName" property="oriName"/>
+ 		</association>	
+ 	</resultMap>
+ 	
+ 	<select id="login" parameterType="MemberDTO" resultType="MemberDTO" >
+ 		SELECT * FROM MEMBER
+ 		WHERE ID=#{id} AND PW=#{pw}
+ 	</select>
+ 
+ 	<insert id="join" parameterType="MemberDTO">
+ 		INSERT INTO MEMBER (ID, PW, NAME, PHONE, EMAIL)
+		VALUES (#{id}, #{pw}, #{name}, #{phone}, #{email})
+ 	</insert>
+ 	
+ </mapper>  
