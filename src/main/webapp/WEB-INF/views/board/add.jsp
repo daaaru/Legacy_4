@@ -16,7 +16,7 @@
 	
 		Title <input type="text" name="title">
 		Contents <textarea name="contents" rows="10" cols="10"></textarea>
-		Writer <input type="text" name="writer">
+		Writer <input type="text" name="writer" value="${member.id }" readonly>
 		
 		<div>
 			<input type="file" name="files">

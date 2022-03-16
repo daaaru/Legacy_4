@@ -21,8 +21,11 @@
 	</div>
 	
 	<a href="./list">List</a>
+	<c:if test="${member.id eq dto.writer }">
 	<a href="./delete?num=${dto.num }">DELETE</a>
 	<a href="./update?num=${dto.num }">UPDATE</a>
+	</c:if>
+	
 	<c:if test="${board ne 'notice' }">
 	<a href="./reply?num=${dto.num }">Reply</a>
 	</c:if>

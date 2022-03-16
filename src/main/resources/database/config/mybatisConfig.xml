@@ -4,18 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
   <configuration>
-  <typeAliases>
-  	<typeAlias type="com.daru.s1.bankbook.BankBookDTO" alias="BankBookDTO"/>
-	<typeAlias type="com.daru.s1.board.notice.NoticeDTO" alias="NoticeDTO"/>
-	<typeAlias type="com.daru.s1.member.MemberDTO" alias="MemberDTO"/>
-	<typeAlias type="com.daru.s1.util.Pager" alias="Pager"/>
-	<typeAlias type="java.lang.Long" alias="Long"/>
-	<typeAlias type="com.daru.s1.board.BoardDTO" alias="BoardDTO"/>
-	<typeAlias type="com.daru.s1.board.qna.QnaDTO" alias="QnaDTO"/>
-	<typeAlias type="com.daru.s1.member.MemberFileDTO" alias="MemberFileDTO"/>
-	<typeAlias type="com.daru.s1.board.BoardFileDTO" alias="BoardFileDTO"/>
-	<typeAlias type="com.daru.s1.board.qna.QnaFileDTO" alias="QnaFileDTO"/>
-	<typeAlias type="java.util.List" alias="List"/>
-	<typeAlias type="com.daru.s1.board.notice.NoticeFileDTO" alias="NoticeFileDTO"/>
-	</typeAliases>  
+  	<typeAliases>
+  		<typeAlias type="com.daru.s1.bankbook.BankBookDTO" alias="BankBookDTO"/>
+  		<typeAlias type="java.lang.Long" alias="Long"/>
+   		<typeAlias type="com.daru.s1.board.notice.NoticeDTO" alias="NoticeDTO"/>
+   		<typeAlias type="com.daru.s1.member.MemberDTO" alias="MemberDTO"/>
+   		<typeAlias type="com.daru.s1.util.Pager" alias="Pager"/>
+   		<typeAlias type="com.daru.s1.board.BoardDTO" alias="BoardDTO"/>
+   		<typeAlias type="com.daru.s1.board.qna.QnaDTO" alias="QnaDTO"/>
+   		<typeAlias type="com.daru.s1.member.MemberFileDTO" alias="MemberFileDTO"/>
+   		<typeAlias type="com.daru.s1.board.BoardFileDTO" alias="BoardFileDTO"/>
+   		<typeAlias type="com.daru.s1.board.notice.NoticeFileDTO" alias="NoticeFileDTO"/>
+   		<typeAlias type="com.daru.s1.board.qna.QnaFileDTO" alias="QnaFileDTO"/>
+   		<typeAlias type="java.util.List" alias="List"/>
+    </typeAliases>
   </configuration>
