@@ -18,11 +18,17 @@
 		Contents <textarea name="contents" rows="10" cols="10"></textarea>
 		Writer <input type="text" name="writer" value="${member.id }" readonly>
 		
-		<div>
-			<input type="file" name="files">
-			<input type="file" name="files">
-			<input type="file" name="files">
+		<div id="fileResult">
+			<!-- <div>
+				<input type="file" name="files"><button type="button">DEL</button> 
+			</div> -->
+			<!-- <input type="file" name="files">
+			<input type="file" name="files"> -->
+		</div>
 		
+		<div>
+			<button type="button" id="fileAdd">FileAdd</button>
+			<button type="button" class="del">Sample DEL</button>
 		</div>
 		
 	<!-- 	Hit <input type="text" name="hit">	 -->
@@ -33,6 +39,6 @@
 		
 	</form>
 	
-	
+	<script src="../resources/js/file.js"></script>
 </body>
 </html>

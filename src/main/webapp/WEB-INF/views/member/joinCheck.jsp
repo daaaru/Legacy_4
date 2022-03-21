@@ -19,7 +19,7 @@
 			전체 동의<input type="checkbox" id="checkAll">
 		</div>
 	
-	
+	<div id="rules">
 		<div class="rule">
 			<fieldset>
 				<legend>동의1</legend>
@@ -51,6 +51,7 @@
 			</fieldset>
 			<div></div>
 		</div>
+	</div>
 	
 		<div class="rule">
 			<button id="btn">JOIN</button>
